@@ -1,11 +1,15 @@
-import { FETCH_POSTS, FETCH_POST } from "../actions/index";
+import { FETCH_POSTS, FETCH_POST, DELETE_POST } from "../actions/index";
 import _ from 'lodash';
 
 export default (state = {}, action) => {
   switch (action.type) {
+    case DELETE_POST:
+      // returns a new state object, omitting the one with the corresponding id
+      return _.omit(state, action.payload);
     case FETCH_POST:
       // const post = action.payload.data;
       // new object with the id as key. [] is doing key interpolation
+      // the newly added post will be overwritten because it will have the same key
       return { ...state, [action.payload.data.id]: action.payload.data };
     case FETCH_POSTS:
       return _.mapKeys(action.payload.data, 'id'); // Returns an object from an array having the id as key
