@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import { fetchPosts } from "../actions/index";
+import { connect } from 'react-redux';
 
 class PostsIndex extends Component {
+
+  componentDidMount() {
+    this.props.fetchPosts();
+  }
+
   render() {
+    console.log(this.props.posts);
     return (
       <div>Posts index</div>
     );
   }
 }
 
-export default PostsIndex;
+function mapStateToProps({ posts }) {
+  return { posts }
+}
+
+export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
