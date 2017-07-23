@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
+import { createPost } from "../actions/index";
+import { connect } from 'react-redux';
 
 class PostsNew extends Component {
 
@@ -28,6 +30,7 @@ class PostsNew extends Component {
 
   onSubmitForm(values) {
     // 'this.formSubmit.bind(this))' -> this === component
+    this.props.createPost(values);
   }
 
   // Any prop set in Field is accessible on the field obj passed to renderField
@@ -91,4 +94,6 @@ function validate(values) {
 export default reduxForm({
   validate: validate,
   form: 'PostsNewForm'                            // The form name has to be unique
-})(PostsNew);
+})(
+  connect(null, { createPost })(PostsNew)
+);
