@@ -53,8 +53,8 @@ class PostsNew extends Component {
             component={ this.renderField }
           />
           <Field
-            label="Category"
-            name="category"
+            label="Categories"
+            name="categories"
             component={ this.renderField }
           />
           <Field
@@ -81,8 +81,8 @@ function validate(values) {
     errors.title = 'Please enter a post title';
   }
 
-  if ( !values.category ) {
-    errors.category = 'Post requires a category';
+  if ( !values.categories ) {
+    errors.categories = 'Post requires a category';
   }
 
   if ( !values.content ) {
