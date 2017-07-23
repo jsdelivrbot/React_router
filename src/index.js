@@ -6,9 +6,12 @@ import { reducers } from "./reducers";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PostsIndex from './components/posts-index';
 import PostsNew from './components/posts-new';
+import PostShow from './components/posts-show';
 import promise from 'redux-promise';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+
+// posts/:id goes second because the new will be accepted by the :id wildcard
 
 ReactDOM.render(
   <Provider store={ createStoreWithMiddleware(reducers) }>
@@ -16,6 +19,7 @@ ReactDOM.render(
       <div>
         <Switch>
           <Route path="/posts/new" component={ PostsNew }/>
+          <Route path="/posts/:id" component={ PostShow }/>
           <Route path="/" component={ PostsIndex }/>
         </Switch>
       </div>
