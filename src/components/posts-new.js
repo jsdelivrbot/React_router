@@ -30,7 +30,10 @@ class PostsNew extends Component {
 
   onSubmitForm(values) {
     // 'this.formSubmit.bind(this))' -> this === component
-    this.props.createPost(values);
+    this.props.createPost(values, () => {
+      // this will automatically navigate back to the root route
+      this.props.history.push('/');
+    });
   }
 
   // Any prop set in Field is accessible on the field obj passed to renderField
