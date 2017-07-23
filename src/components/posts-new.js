@@ -47,6 +47,31 @@ class PostsNew extends Component {
   }
 }
 
+function validate(values) {
+  // Console.log(values) -> {title: 'assa', categories: 'dsfsdf', content: 'sdfsdf'}
+
+  const errors = {};
+
+  // Validate inputs from values object;
+
+  if ( !values.title ) {
+    errors.title = 'Please enter a post title';
+  }
+
+  if (!values.category) {
+    errors.category = 'Post requires a category';
+  }
+
+  if (!values.content) {
+    errors.content = 'Add some content to the post';
+  }
+
+  // if errors is empty, the form is fine to submit
+  // if errors has *any* properties, redux form assumes form is invalid
+  return errors;
+}
+
 export default reduxForm({
+  validate: validate,
   form: 'PostsNewForm'                            // The form name has to be unique
 })(PostsNew);
