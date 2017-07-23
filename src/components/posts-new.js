@@ -6,7 +6,7 @@ class PostsNew extends Component {
 // The field argument is an object which contains some event handlers that need to be wired to the JSX
 // The Field component is responsible for any changes on this input
 // field.input is an object which contains event handlers i.e. onChange, onBlur, onFocus
-
+// field.meta.error is automatically added to field with the calidate helper function
   renderField(field) {
     return (
       <div className="form-group">
@@ -16,16 +16,26 @@ class PostsNew extends Component {
           type="text"
           { ...field.input }
         />
+        { field.meta.error }
       </div>
     );
+  }
+
+  onSubmitForm(values) {
+    // 'this.formSubmit.bind(this))' -> this === component
   }
 
   // Any prop set in Field is accessible on the field obj passed to renderField
 
   render() {
+    // Wiring the form to the component added a bunch of props to the component.
+    // extracting the handleSubmit property from the component props
+    // thre result is passed to this.onSubmitForm
+    const { handleSubmit } = this.props;
+
     return (
       <div>
-        <form>
+        <form onSubmit={ handleSubmit(this.onSubmitForm.bind(this)) }>
           <Field
             label="Title"
             name="title"
@@ -41,6 +51,7 @@ class PostsNew extends Component {
             name="content"
             component={ this.renderField }
           />
+          <button type="submit" className="btn btn-primary">Submit</button>
         </form>
       </div>
     );
@@ -58,11 +69,11 @@ function validate(values) {
     errors.title = 'Please enter a post title';
   }
 
-  if (!values.category) {
+  if ( !values.category ) {
     errors.category = 'Post requires a category';
   }
 
-  if (!values.content) {
+  if ( !values.content ) {
     errors.content = 'Add some content to the post';
   }
 
