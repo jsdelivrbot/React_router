@@ -8,6 +8,9 @@ class PostsNew extends Component {
 // field.input is an object which contains event handlers i.e. onChange, onBlur, onFocus
 // field.meta.error is automatically added to field with the calidate helper function
   renderField(field) {
+    // further destructure properties of meta. Access properties of nested objects
+    const { meta: { touched, error } } = field;
+
     return (
       <div className="form-group">
         <label>{ field.label }</label>
@@ -16,7 +19,7 @@ class PostsNew extends Component {
           type="text"
           { ...field.input }
         />
-        {  field.meta.touched ? field.meta.error : '' }
+        { touched ? error : '' }
       </div>
     );
   }
