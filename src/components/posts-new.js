@@ -9,8 +9,10 @@ class PostsNew extends Component {
 
   renderField(field) {
     return (
-      <div>
+      <div className="form-group">
+        <label>{ field.label }</label>
         <input
+          className="form-control"
           type="text"
           { ...field.input }
         />
@@ -18,11 +20,14 @@ class PostsNew extends Component {
     );
   }
 
+  // Any prop set in Field is accessible on the field obj passed to renderField
+
   render() {
     return (
       <div>
         <form>
           <Field
+            label="Title"
             name="title"
             component={ this.renderField }
           />
