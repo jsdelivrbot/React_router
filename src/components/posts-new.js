@@ -10,16 +10,17 @@ class PostsNew extends Component {
   renderField(field) {
     // further destructure properties of meta. Access properties of nested objects
     const { meta: { touched, error } } = field;
+    const className = `form-group ${ touched && error ? 'has-danger' : '' }`;
 
     return (
-      <div className="form-group">
+      <div className={className}>
         <label>{ field.label }</label>
         <input
           className="form-control"
           type="text"
           { ...field.input }
         />
-        { touched ? error : '' }
+        <div className="text-help">{ touched ? error : '' }</div>
       </div>
     );
   }
