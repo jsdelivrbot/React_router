@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { fetchPosts } from "../actions/index";
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 class PostsIndex extends Component {
 
@@ -11,7 +12,7 @@ class PostsIndex extends Component {
   }                                         // Exact name
 
   render() {
-                                            // _.map creates an array from object, used for the component to render it
+    // _.map creates an array from object, used for the component to render it
     const posts = _.map(this.props.posts, (post) => {
       return (
         <li
@@ -25,6 +26,7 @@ class PostsIndex extends Component {
     return (
       <div>
         <h3> Your list of posts</h3>
+        <Link className="btn btn-primary" to="/posts/new">New post</Link>
         <ul className="list-group">
           { posts }
         </ul>
